@@ -282,12 +282,17 @@ function html(body) {
       <div id="search-result" class="demo-result">Type to search...</div>
 
       <h3>Polling (<code>every 2s</code>)</h3>
-      <div hx-get="/api/poll" hx-trigger="every 2s" hx-target="#poll-result" hx-swap="innerHTML" id="poll-container">
-        <div id="poll-result" class="demo-result">Polling active...</div>
+      <div id="poll-container">
+        <div id="poll-result" class="demo-result">Click Start to begin polling</div>
       </div>
-      <button class="btn outline" onclick="document.getElementById('poll-container').removeAttribute('hx-trigger'); htmx.process(document.getElementById('poll-container'));">
-        Stop Polling
-      </button>
+      <div class="flex" style="margin-top:4px;">
+        <button class="btn outline" onclick="var c=document.getElementById('poll-container');c.setAttribute('hx-get','/api/poll');c.setAttribute('hx-trigger','every 2s');c.setAttribute('hx-target','#poll-result');c.setAttribute('hx-swap','innerHTML');htmx.process(c);">
+          Start Polling
+        </button>
+        <button class="btn outline" onclick="var c=document.getElementById('poll-container');c.removeAttribute('hx-trigger');c.removeAttribute('hx-get');htmx.process(c);">
+          Stop Polling
+        </button>
+      </div>
 
       <h3><code>hx-boost</code> (enhanced link)</h3>
       <div hx-boost="true">
