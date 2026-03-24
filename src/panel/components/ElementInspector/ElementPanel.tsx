@@ -1,5 +1,5 @@
 import { useSignal } from '@preact/signals'
-import { inspectedElement, htmxElements, pendingAction, pickedSelector } from '../../store'
+import { inspectedElement, htmxElements, pendingAction, pickedSelector, events } from '../../store'
 import { sendCommand } from '../../connection'
 import { api } from '../../../shared/browser-api'
 import { AttributeList } from './AttributeList'
@@ -263,6 +263,14 @@ export function ElementInspector() {
   useEffect(() => {
     doScan()
 
+    // Auto-refresh every 2s for real-time updates
+    const interval = setInterval(doScan, 2000)
+
+    // Also re-scan when new htmx events arrive
+    const unsubEvents = events.subscribe((evts) => {
+      if (evts.length > 0) doScan()
+    })
+
     // Subscribe to picker results from page-script
     const unsubPicked = pickedSelector.subscribe((sel) => {
       if (sel) {
@@ -282,7 +290,12 @@ export function ElementInspector() {
       }
     })
 
-    return () => { unsubPicked(); unsubAction() }
+    return () => {
+      clearInterval(interval)
+      unsubEvents()
+      unsubPicked()
+      unsubAction()
+    }
   }, [])
 
   return (
@@ -296,9 +309,6 @@ export function ElementInspector() {
         >
           &#x2316;
         </button>
-        <button class="toolbar__btn" title="Refresh" onClick={doScan}>
-          &#x21BB;
-        </button>
         <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
           {picking.value ? 'Click an element on the page...' : `${elementCount.value} htmx element${elementCount.value !== 1 ? 's' : ''}`}
         </span>
@@ -308,7 +318,7 @@ export function ElementInspector() {
           {treeData.value.length === 0 ? (
             <div class="empty-state" style={{ padding: '16px' }}>
               <div style={{ fontSize: '11px' }}>No htmx elements found</div>
-              <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>Reload page then click &#x21BB;</div>
+              <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>Waiting for htmx elements...</div>
             </div>
           ) : (
             treeData.value.map((node, i) => (
