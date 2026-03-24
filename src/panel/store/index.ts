@@ -75,6 +75,14 @@ export function clearAll(): void {
   errors.value = []
   inspectedElement.value = null
   selectedRequestId.value = null
+  htmxElements.value = []
+  // Swap records are cleared via onClear callbacks
+  for (const cb of onClearCallbacks) cb()
+}
+
+const onClearCallbacks: Array<() => void> = []
+export function onClear(cb: () => void): void {
+  onClearCallbacks.push(cb)
 }
 
 export function initState(data: {

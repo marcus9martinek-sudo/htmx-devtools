@@ -99,7 +99,10 @@ export function applyEventToRequest(
   if (newPhase) request.phase = newPhase
 
   const newStatus = getStatusForEvent(event.name)
-  if (newStatus) request.status = newStatus
+  // Don't overwrite error/aborted/timeout status with 'success' from afterRequest
+  if (newStatus && !(newStatus === 'success' && request.status !== 'pending')) {
+    request.status = newStatus
+  }
 
   if (event.name === 'htmx:configRequest') {
     request.verb = (detail.verb as string) || ''

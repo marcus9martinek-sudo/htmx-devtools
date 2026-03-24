@@ -25,7 +25,7 @@ function flattenHtml(): Plugin {
 
         let html = await readFile(fromPath, 'utf-8')
         const prefix = '../'.repeat(depth)
-        html = html.replaceAll(`"${prefix}`, '"./').replaceAll(`'${prefix}`, '\'\./')
+        html = html.replaceAll(`"${prefix}`, '"./').replaceAll(`'${prefix}`, `'./`)
         await writeFile(toPath, html)
       }
 

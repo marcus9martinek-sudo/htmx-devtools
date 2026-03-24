@@ -60,6 +60,7 @@ export const ERROR_EVENTS = new Set([
   'htmx:onLoadError',
   'htmx:invalidPath',
   'htmx:eventFilter:error',
+  'htmx:validation:halted',
 ])
 
 export const REQUEST_START_EVENT = 'htmx:configRequest'

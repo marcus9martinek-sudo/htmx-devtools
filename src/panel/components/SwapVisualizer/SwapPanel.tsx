@@ -1,6 +1,6 @@
 import { signal } from '@preact/signals'
 import { useEffect } from 'preact/hooks'
-import { requests } from '../../store'
+import { requests, onClear } from '../../store'
 import { api } from '../../../shared/browser-api'
 import { DomDiff } from './DomDiff'
 import type { RequestLifecycle } from '../../../shared/types'
@@ -74,11 +74,14 @@ function processNewSwaps(): void {
   }
 }
 
-function clearRecords(): void {
+export function clearRecords(): void {
   swapRecords.value = []
   recordedIds.clear()
   selectedId.value = null
 }
+
+// Auto-clear when store clears (page navigation or user clear)
+onClear(clearRecords)
 
 export function SwapPanel() {
   const reqs = requests.value

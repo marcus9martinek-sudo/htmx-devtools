@@ -61,6 +61,11 @@ api.runtime.onConnect.addListener((port) => {
 
     // Forward commands to content script
     if (msg.type?.startsWith('cmd:') && msg.tabId) {
+      // Intercept clear to also reset background state
+      if (msg.type === 'cmd:clear') {
+        store.clearTabState(msg.tabId)
+        sendToPanel(msg.tabId, { type: 'state:clear', payload: null })
+      }
       sendToContent(msg.tabId, {
         source: MESSAGE_SOURCE,
         type: msg.type,
