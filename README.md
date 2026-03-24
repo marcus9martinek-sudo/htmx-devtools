@@ -1,33 +1,54 @@
-# </> HTMX DevTools
+<p align="center">
+  <img src="docs/screenshots/requests.png" alt="HTMX DevTools" width="100%">
+</p>
 
-Browser DevTools extension for debugging [HTMX](https://htmx.org) applications. Inspect requests, elements, events, swaps, and errors in real time.
+<h1 align="center">&lt;/&gt; HTMX DevTools</h1>
 
-![Requests Tab](docs/screenshots/requests.png)
+<p align="center">
+  Browser DevTools extension for debugging <a href="https://htmx.org">HTMX</a> applications.<br>
+  Inspect requests, elements, events, swaps, and errors in real time.
+</p>
+
+<p align="center">
+  <a href="https://atoolz.github.io/htmx-devtools/">Live Demo</a> &middot;
+  <a href="#installation">Install</a> &middot;
+  <a href="#features">Features</a> &middot;
+  <a href="#how-it-works">Architecture</a>
+</p>
+
+---
 
 ## Features
 
 ### Request Inspector
+
 Capture the full HTMX request lifecycle with timing breakdown, headers, request/response body, and event trace.
 
 - HTTP verb, URL, status, swap strategy
 - Trigger and target element identification
 - Visual timeline bar (Config > Send > Wait > Swap > Settle)
 - HX-* request and response headers
-- Record/pause/clear controls
+- Record / Pause / Clear controls
 
-![Request Inspector](docs/screenshots/requests.png)
+<p align="center">
+  <img src="docs/screenshots/requests.png" alt="Request Inspector" width="100%">
+</p>
 
 ### Element Inspector
+
 Live DOM tree showing all HTMX elements with their hierarchy, attributes, and resolved targets. Updates in real time as the page changes.
 
 - Collapsible DOM tree filtered to HTMX-relevant nodes
-- Click to inspect: shows hx-* attributes, resolved targets, internal data
+- Click to inspect: shows `hx-*` attributes, resolved targets, internal data
 - Element picker: click any element on the page to inspect it
 - Hover highlighting on the inspected page
 
-![Element Inspector](docs/screenshots/elements.png)
+<p align="center">
+  <img src="docs/screenshots/elements.png" alt="Element Inspector" width="100%">
+</p>
 
 ### Event Timeline
+
 Filterable timeline of all HTMX events with category color coding and expandable detail payloads.
 
 - Category filters: Init, Request, XHR, Response, Swap, OOB, History, Transition, Error
@@ -35,34 +56,46 @@ Filterable timeline of all HTMX events with category color coding and expandable
 - Click to expand full `event.detail` JSON
 - Request correlation (linked request ID)
 
-![Event Timeline](docs/screenshots/timeline.png)
-![Event Detail](docs/screenshots/timeline-detail.png)
+<p align="center">
+  <img src="docs/screenshots/timeline.png" alt="Event Timeline" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/timeline-detail.png" alt="Event Detail Expanded" width="100%">
+</p>
 
 ### Swap Visualizer
+
 Record DOM swaps with before/after snapshots and diff view.
 
-- Record/pause controls
+- Record / Pause controls
 - Response HTML view
-- Before/After DOM snapshots
+- Before / After DOM snapshots
 - Line-by-line diff with add/remove highlighting
 - Swap strategy and target element info
 
-![Swap Visualizer](docs/screenshots/swaps.png)
+<p align="center">
+  <img src="docs/screenshots/swaps.png" alt="Swap Visualizer" width="100%">
+</p>
 
 ### Error Panel
+
 Surface silent HTMX failures grouped by error type with badge counts.
 
 - Response errors (4xx, 5xx)
 - Target not found errors
-- Network timeouts
-- Swap errors
+- Network timeouts and swap errors
 - Click to jump to associated request
 
-![Error Panel](docs/screenshots/errors.png)
+<p align="center">
+  <img src="docs/screenshots/errors.png" alt="Error Panel" width="100%">
+</p>
+
+---
 
 ## Installation
 
-### From source (development)
+### From source
 
 ```bash
 git clone https://github.com/atoolz/htmx-devtools.git
@@ -71,23 +104,36 @@ npm install
 npm run build:chrome
 ```
 
-#### Chrome / Edge / Brave / Arc
+**Chrome / Edge / Brave / Arc:**
+
 1. Open `chrome://extensions`
-2. Enable "Developer mode"
-3. Click "Load unpacked"
+2. Enable **Developer mode**
+3. Click **Load unpacked**
 4. Select the `dist/` folder
 
-#### Firefox
+**Firefox:**
+
 ```bash
 npm run build:firefox
 ```
+
 1. Open `about:debugging#/runtime/this-firefox`
-2. Click "Load Temporary Add-on"
+2. Click **Load Temporary Add-on**
 3. Select `dist/manifest.json`
 
-## How it works
+---
 
-The extension uses a 4-layer architecture:
+## Live Demo
+
+Try the extension with the interactive demo page (no server needed):
+
+**[atoolz.github.io/htmx-devtools](https://atoolz.github.io/htmx-devtools/)**
+
+The demo uses a client-side mock server that intercepts XMLHttpRequest, so all HTMX features work in the browser. Install the extension, open the demo, and press F12 > HTMX tab.
+
+---
+
+## How it works
 
 ```
 Page Script          Content Script       Service Worker       DevTools Panel
@@ -98,37 +144,46 @@ events on            postMessage +         maintains state      with real-time
 document             runtime.sendMessage   per tab              updates
 ```
 
-- **Page Script** runs in the page's JS context via `"world": "MAIN"` content script. Listens to all `htmx:*` events, serializes element data, and batches messages.
-- **Content Script** bridges page context and extension context via `window.postMessage` and `chrome.runtime.sendMessage`.
-- **Background Service Worker** manages per-tab state, tracks request lifecycles, and routes data to the panel.
-- **Panel** is a Preact + Signals app rendered inside `chrome.devtools.panels.create()`.
+- **Page Script** runs in the page's JS context via `"world": "MAIN"` content script. Listens to all `htmx:*` events, serializes element data, and batches messages every 50ms.
+- **Content Script** bridges page and extension contexts via `window.postMessage` and `chrome.runtime.sendMessage`.
+- **Background Service Worker** manages per-tab state, tracks request lifecycles, correlates events to requests, and routes data to the panel.
+- **Panel** is a Preact + Signals app (50KB) rendered inside `chrome.devtools.panels.create()`.
+
+---
 
 ## Development
 
 ```bash
-npm run dev          # Watch mode (rebuilds on changes)
-npm run build        # Production build
-npm run build:chrome # Build + copy Chrome manifest
-npm run build:firefox # Build + copy Firefox manifest
-npm run typecheck    # TypeScript check
-npm run test         # Run tests
+npm run dev            # Watch mode (rebuilds on changes)
+npm run build          # Production build
+npm run build:chrome   # Build + copy Chrome manifest + icons
+npm run build:firefox  # Build + copy Firefox manifest + icons
+npm run typecheck      # TypeScript type check
+npm run test           # Run tests
 ```
 
-### Test page
-
-A test server with all HTMX features is included:
+### Local test server
 
 ```bash
 node test/e2e/fixtures/test-server.js
+# Open http://localhost:3456
 ```
 
-Open `http://localhost:3456` to test all features: GET/POST/PUT/DELETE requests, error scenarios (404, 500, timeout), swap strategies, OOB swaps, polling, search with delay, contact editor (click-to-edit pattern), and todo list.
+Covers: GET/POST/PUT/DELETE, error scenarios (404, 500, timeout), all swap strategies, OOB swaps, polling, search with delay, contact editor (click-to-edit), and todo list.
 
-## Tech stack
+---
 
-- **TypeScript** + **Vite** (multi-entry build with IIFE outputs)
-- **Preact** + **@preact/signals** (3KB panel UI)
-- **Chrome Manifest V3** (also compatible with Firefox MV3 128+)
+## Tech Stack
+
+| | |
+|---|---|
+| **Language** | TypeScript |
+| **Build** | Vite (multi-entry, IIFE outputs for content/page/background scripts) |
+| **UI** | Preact + @preact/signals (3KB gzipped) |
+| **Manifest** | Chrome MV3 (also Firefox MV3 128+) |
+| **Target** | Chrome, Edge, Brave, Arc, Opera, Firefox |
+
+---
 
 ## License
 
