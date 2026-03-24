@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e1e"/>
+      <stop offset="100%" stop-color="#252526"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Panel background -->
+  <rect width="800" height="500" rx="8" fill="url(#bg)"/>
+  <rect width="800" height="1" y="0" fill="#3c3c3c"/>
+
+  <!-- Tab bar -->
+  <rect width="800" height="32" fill="#252526"/>
+  <rect width="800" height="1" y="32" fill="#3c3c3c"/>
+  <g font-family="-apple-system,sans-serif" font-size="12" fill="#969696">
+    <text x="20" y="22" fill="#cccccc" font-weight="600">Requests</text>
+    <rect x="12" y="29" width="72" height="2" rx="1" fill="#3b82f6"/>
+    <text x="100" y="22">Elements</text>
+    <text x="170" y="22">Timeline</text>
+    <text x="240" y="22">Swaps</text>
+    <text x="290" y="22">Errors</text>
+    <text x="720" y="22" fill="#6a6a6a" font-size="11">htmx v2.0.4</text>
+  </g>
+
+  <!-- Toolbar -->
+  <rect y="33" width="800" height="28" fill="#252526"/>
+  <rect width="800" height="1" y="61" fill="#3c3c3c"/>
+  <circle cx="22" cy="47" r="5" fill="#ef4444"/>
+  <text x="36" y="51" font-family="-apple-system,sans-serif" font-size="11" fill="#6a6a6a">5 requests</text>
+
+  <!-- Split: List left, Detail right -->
+  <rect x="320" y="62" width="1" height="438" fill="#3c3c3c"/>
+
+  <!-- Request list -->
+  <g font-family="'SF Mono','Fira Code',monospace" font-size="11">
+    <!-- Row 1 - selected -->
+    <rect y="62" width="320" height="30" fill="#094771"/>
+    <circle cx="16" cy="77" r="4" fill="#22c55e"/>
+    <rect x="28" y="70" width="30" height="14" rx="2" fill="#22c55e"/><text x="33" y="81" fill="#000" font-size="9" font-weight="700">GET</text>
+    <text x="64" y="81" fill="#969696">/api/time</text>
+    <text x="230" y="81" fill="#06b6d4" font-size="10">&lt;button&gt;</text>
+    <text x="288" y="81" fill="#6a6a6a" font-size="10">9ms</text>
+
+    <!-- Row 2 -->
+    <rect y="92" width="320" height="30" fill="transparent"/>
+    <circle cx="16" cy="107" r="4" fill="#22c55e"/>
+    <rect x="28" y="100" width="30" height="14" rx="2" fill="#3b82f6"/><text x="31" y="111" fill="#fff" font-size="9" font-weight="700">POST</text>
+    <text x="64" y="111" fill="#969696">/api/echo</text>
+    <text x="230" y="111" fill="#06b6d4" font-size="10">&lt;button&gt;</text>
+    <text x="288" y="111" fill="#6a6a6a" font-size="10">12ms</text>
+
+    <!-- Row 3 -->
+    <rect y="122" width="320" height="30" fill="transparent"/>
+    <circle cx="16" cy="137" r="4" fill="#22c55e"/>
+    <rect x="28" y="130" width="30" height="14" rx="2" fill="#f59e0b"/><text x="33" y="141" fill="#000" font-size="9" font-weight="700">PUT</text>
+    <text x="64" y="141" fill="#969696">/api/update</text>
+    <text x="230" y="141" fill="#06b6d4" font-size="10">&lt;button&gt;</text>
+    <text x="288" y="141" fill="#6a6a6a" font-size="10">8ms</text>
+
+    <!-- Row 4 -->
+    <rect y="152" width="320" height="30" fill="transparent"/>
+    <circle cx="16" cy="167" r="4" fill="#ef4444"/>
+    <rect x="28" y="160" width="42" height="14" rx="2" fill="#ef4444"/><text x="30" y="171" fill="#fff" font-size="9" font-weight="700">DELETE</text>
+    <text x="76" y="171" fill="#969696">/api/item/42</text>
+    <text x="230" y="171" fill="#06b6d4" font-size="10">&lt;button&gt;</text>
+    <text x="288" y="171" fill="#6a6a6a" font-size="10">6ms</text>
+
+    <!-- Row 5 -->
+    <rect y="182" width="320" height="30" fill="transparent"/>
+    <circle cx="16" cy="197" r="4" fill="#ef4444"/>
+    <rect x="28" y="190" width="30" height="14" rx="2" fill="#22c55e"/><text x="33" y="201" fill="#000" font-size="9" font-weight="700">GET</text>
+    <text x="64" y="201" fill="#969696">/api/error-500</text>
+    <text x="230" y="201" fill="#06b6d4" font-size="10">&lt;button&gt;</text>
+    <text x="288" y="201" fill="#6a6a6a" font-size="10">10ms</text>
+  </g>
+
+  <!-- Detail panel -->
+  <g font-family="-apple-system,sans-serif" transform="translate(332, 70)">
+    <!-- Summary -->
+    <text y="10" font-size="10" fill="#6a6a6a" font-weight="600" text-transform="uppercase" letter-spacing="0.5">SUMMARY</text>
+    <g font-size="11" font-family="'SF Mono',monospace">
+      <text x="0" y="30" fill="#06b6d4">Method</text><text x="100" y="30" fill="#cccccc">GET</text>
+      <text x="0" y="48" fill="#06b6d4">URL</text><text x="100" y="48" fill="#cccccc">/api/time</text>
+      <text x="0" y="66" fill="#06b6d4">Status</text><text x="100" y="66" fill="#22c55e">success</text>
+      <text x="0" y="84" fill="#06b6d4">Phase</text><text x="100" y="84" fill="#cccccc">complete</text>
+      <text x="0" y="102" fill="#06b6d4">Swap</text><text x="100" y="102" fill="#cccccc">innerHTML</text>
+      <text x="0" y="120" fill="#06b6d4">Trigger</text><text x="100" y="120" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+      <text x="0" y="138" fill="#06b6d4">Target</text><text x="100" y="138" fill="#06b6d4">&lt;div#get-result&gt;</text>
+    </g>
+
+    <!-- Timeline bar -->
+    <text y="170" font-size="10" fill="#6a6a6a" font-weight="600">TIMELINE (9ms total)</text>
+    <g transform="translate(0, 178)">
+      <rect width="60" height="16" rx="3" fill="#6366f1"/><text x="8" y="12" font-size="8" fill="#fff" font-weight="600">Config &lt;1ms</text>
+      <rect x="60" width="20" height="16" fill="#3b82f6"/><text x="63" y="12" font-size="8" fill="#fff" font-weight="600"></text>
+      <rect x="80" width="200" height="16" fill="#f59e0b"/><text x="130" y="12" font-size="8" fill="#000" font-weight="600">Wait 6ms</text>
+      <rect x="280" width="40" height="16" fill="#22c55e"/><text x="284" y="12" font-size="8" fill="#fff" font-weight="600">Swap</text>
+      <rect x="320" width="120" height="16" rx="0 3 3 0" fill="#06b6d4"/><text x="340" y="12" font-size="8" fill="#fff" font-weight="600">Settle 22ms</text>
+    </g>
+
+    <!-- Headers -->
+    <text y="225" font-size="10" fill="#6a6a6a" font-weight="600">REQUEST HEADERS</text>
+    <g font-size="11" font-family="'SF Mono',monospace">
+      <text x="0" y="242" fill="#06b6d4">HX-Request</text><text x="130" y="242" fill="#cccccc">true</text>
+      <text x="0" y="258" fill="#06b6d4">HX-Target</text><text x="130" y="258" fill="#cccccc">get-result</text>
+      <text x="0" y="274" fill="#06b6d4">HX-Current-URL</text><text x="130" y="274" fill="#cccccc">http://localhost:3456/</text>
+    </g>
+
+    <!-- Response -->
+    <text y="304" font-size="10" fill="#6a6a6a" font-weight="600">RESPONSE BODY</text>
+    <rect y="312" width="450" height="40" rx="3" fill="#1e1e1e"/>
+    <text x="8" y="336" font-size="11" font-family="'SF Mono',monospace" fill="#abb2bf">&lt;span class="badge"&gt;Server time: 10:53:55 AM&lt;/span&gt;</text>
+
+    <!-- Events -->
+    <text y="376" font-size="10" fill="#6a6a6a" font-weight="600">EVENTS (8)</text>
+    <g font-size="10" font-family="'SF Mono',monospace">
+      <text x="0" y="393" fill="#3b82f6">configRequest</text><text x="200" y="393" fill="#6a6a6a">+0ms</text>
+      <text x="0" y="408" fill="#3b82f6">beforeRequest</text><text x="200" y="408" fill="#6a6a6a">+0ms</text>
+      <text x="0" y="423" fill="#3b82f6">beforeSend</text><text x="200" y="423" fill="#6a6a6a">+1ms</text>
+    </g>
+  </g>
+
+  <!-- Border -->
+  <rect width="800" height="500" rx="8" fill="none" stroke="#3c3c3c" stroke-width="1"/>
+</svg>

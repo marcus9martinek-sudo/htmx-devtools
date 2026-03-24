@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/demos/demo-panel.gif" alt="HTMX DevTools - All Features" width="700">
+  <img src="assets/banner.svg" alt="HTMX DevTools" width="100%">
 </p>
 
 <h1 align="center">&lt;/&gt; HTMX DevTools</h1>
@@ -31,7 +31,7 @@ Capture the full HTMX request lifecycle with timing breakdown, headers, request/
 - Record / Pause / Clear controls
 
 <p align="center">
-  <img src="docs/demos/demo-requests.png" alt="Request Inspector" width="700">
+  <img src="assets/feature-requests.svg" alt="Request Inspector" width="800">
 </p>
 
 ### Element Inspector
@@ -44,7 +44,7 @@ Live DOM tree showing all HTMX elements with their hierarchy, attributes, and re
 - Hover highlighting on the inspected page
 
 <p align="center">
-  <img src="docs/demos/demo-elements.png" alt="Element Inspector" width="700">
+  <img src="assets/feature-elements.svg" alt="Element Inspector" width="800">
 </p>
 
 ### Event Timeline
@@ -57,7 +57,7 @@ Filterable timeline of all HTMX events with category color coding and expandable
 - Request correlation (linked request ID)
 
 <p align="center">
-  <img src="docs/demos/demo-timeline-focus.gif" alt="Event Timeline with expandable details" width="700">
+  <img src="assets/feature-timeline.svg" alt="Event Timeline" width="800">
 </p>
 
 ### Swap Visualizer
@@ -71,7 +71,7 @@ Record DOM swaps with before/after snapshots and diff view.
 - Swap strategy and target element info
 
 <p align="center">
-  <img src="docs/demos/demo-swaps.png" alt="Swap Visualizer" width="700">
+  <img src="assets/feature-swaps.svg" alt="Swap Visualizer" width="800">
 </p>
 
 ### Error Panel
@@ -84,7 +84,7 @@ Surface silent HTMX failures grouped by error type with badge counts.
 - Click to jump to associated request
 
 <p align="center">
-  <img src="docs/demos/demo-errors.png" alt="Error Panel" width="700">
+  <img src="assets/feature-errors.svg" alt="Error Panel" width="800">
 </p>
 
 ---

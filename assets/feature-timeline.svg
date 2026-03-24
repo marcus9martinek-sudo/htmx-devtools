@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e1e"/>
+      <stop offset="100%" stop-color="#252526"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="460" rx="8" fill="url(#bg)"/>
+
+  <!-- Tab bar -->
+  <rect width="800" height="32" fill="#252526"/>
+  <rect width="800" height="1" y="32" fill="#3c3c3c"/>
+  <g font-family="-apple-system,sans-serif" font-size="12" fill="#969696">
+    <text x="20" y="22">Requests</text>
+    <text x="100" y="22">Elements</text>
+    <text x="170" y="22" fill="#cccccc" font-weight="600">Timeline</text>
+    <rect x="162" y="29" width="66" height="2" rx="1" fill="#3b82f6"/>
+    <text x="240" y="22">Swaps</text>
+    <text x="290" y="22">Errors</text>
+  </g>
+
+  <!-- Search bar -->
+  <rect y="33" width="800" height="28" fill="#252526"/>
+  <rect x="8" y="38" width="200" height="18" rx="4" fill="#1e1e1e" stroke="#3c3c3c" stroke-width="0.5"/>
+  <text x="16" y="51" font-family="-apple-system,sans-serif" font-size="11" fill="#6a6a6a">Filter events...</text>
+  <rect width="800" height="1" y="61" fill="#3c3c3c"/>
+
+  <!-- Category filters -->
+  <rect y="62" width="800" height="28" fill="#252526"/>
+  <rect width="800" height="1" y="90" fill="#3c3c3c"/>
+  <g font-family="-apple-system,sans-serif" font-size="9" font-weight="600" text-anchor="middle">
+    <rect x="10" y="67" width="34" height="18" rx="3" fill="#6366f1"/><text x="27" y="80" fill="#fff">INIT</text>
+    <rect x="50" y="67" width="55" height="18" rx="3" fill="#3b82f6"/><text x="77" y="80" fill="#fff">REQUEST</text>
+    <rect x="111" y="67" width="30" height="18" rx="3" fill="#8b5cf6"/><text x="126" y="80" fill="#fff">XHR</text>
+    <rect x="147" y="67" width="60" height="18" rx="3" fill="#06b6d4"/><text x="177" y="80" fill="#fff">RESPONSE</text>
+    <rect x="213" y="67" width="38" height="18" rx="3" fill="#22c55e"/><text x="232" y="80" fill="#fff">SWAP</text>
+    <rect x="257" y="67" width="30" height="18" rx="3" fill="#14b8a6"/><text x="272" y="80" fill="#fff">OOB</text>
+    <rect x="293" y="67" width="52" height="18" rx="3" fill="#f59e0b"/><text x="319" y="80" fill="#000">HISTORY</text>
+    <rect x="351" y="67" width="70" height="18" rx="3" fill="#a855f7"/><text x="386" y="80" fill="#fff">TRANSITION</text>
+    <rect x="427" y="67" width="42" height="18" rx="3" fill="#ef4444"/><text x="448" y="80" fill="#fff">ERROR</text>
+  </g>
+
+  <!-- Count -->
+  <text x="12" y="108" font-family="-apple-system,sans-serif" font-size="10" fill="#6a6a6a">16 events (16 total)</text>
+  <rect width="800" height="1" y="112" fill="#3c3c3c"/>
+
+  <!-- Event rows -->
+  <g font-family="'SF Mono','Fira Code',monospace" font-size="11">
+    <!-- Row 1 -->
+    <text x="12" y="132" fill="#6a6a6a" font-size="10">+0ms</text>
+    <circle cx="68" cy="128" r="3" fill="#3b82f6"/>
+    <text x="80" y="132" fill="#3b82f6">confirm</text>
+    <text x="400" y="132" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+    <text x="720" y="132" fill="#6a6a6a" font-size="10">req:8fr21t</text>
+
+    <!-- Row 2 -->
+    <text x="12" y="152" fill="#6a6a6a" font-size="10">+1ms</text>
+    <circle cx="68" cy="148" r="3" fill="#3b82f6"/>
+    <text x="80" y="152" fill="#3b82f6">configRequest</text>
+    <text x="400" y="152" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+    <text x="720" y="152" fill="#6a6a6a" font-size="10">req:0wtkr</text>
+
+    <!-- Row 3 -->
+    <text x="12" y="172" fill="#6a6a6a" font-size="10">+2ms</text>
+    <circle cx="68" cy="168" r="3" fill="#3b82f6"/>
+    <text x="80" y="172" fill="#3b82f6">beforeRequest</text>
+    <text x="400" y="172" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+    <text x="720" y="172" fill="#6a6a6a" font-size="10">req:0wtkr</text>
+
+    <!-- Row 4 -->
+    <text x="12" y="192" fill="#6a6a6a" font-size="10">+3ms</text>
+    <circle cx="68" cy="188" r="3" fill="#3b82f6"/>
+    <text x="80" y="192" fill="#3b82f6">beforeSend</text>
+    <text x="400" y="192" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+    <text x="720" y="192" fill="#6a6a6a" font-size="10">req:0wtkr</text>
+
+    <!-- Row 5 - XHR -->
+    <text x="12" y="212" fill="#6a6a6a" font-size="10">+3ms</text>
+    <circle cx="68" cy="208" r="3" fill="#8b5cf6"/>
+    <text x="80" y="212" fill="#8b5cf6">xhr:loadstart</text>
+    <text x="400" y="212" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+    <text x="720" y="212" fill="#6a6a6a" font-size="10">req:0wtkr</text>
+
+    <!-- Row 6 -->
+    <text x="12" y="232" fill="#6a6a6a" font-size="10">+12ms</text>
+    <circle cx="68" cy="228" r="3" fill="#8b5cf6"/>
+    <text x="80" y="232" fill="#8b5cf6">xhr:progress</text>
+    <text x="400" y="232" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+
+    <!-- Row 7 - Response -->
+    <text x="12" y="252" fill="#6a6a6a" font-size="10">+13ms</text>
+    <circle cx="68" cy="248" r="3" fill="#06b6d4"/>
+    <text x="80" y="252" fill="#06b6d4">beforeOnLoad</text>
+    <text x="400" y="252" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+
+    <!-- Row 8 - Swap -->
+    <text x="12" y="272" fill="#6a6a6a" font-size="10">+13ms</text>
+    <circle cx="68" cy="268" r="3" fill="#22c55e"/>
+    <text x="80" y="272" fill="#22c55e">beforeSwap</text>
+    <text x="400" y="272" fill="#06b6d4">&lt;div#get-result&gt;</text>
+
+    <!-- Row 9 -->
+    <text x="12" y="292" fill="#6a6a6a" font-size="10">+14ms</text>
+    <circle cx="68" cy="288" r="3" fill="#22c55e"/>
+    <text x="80" y="292" fill="#22c55e">afterSwap</text>
+    <text x="400" y="292" fill="#06b6d4">&lt;div#get-result&gt;</text>
+
+    <!-- Row 10 -->
+    <text x="12" y="312" fill="#6a6a6a" font-size="10">+15ms</text>
+    <circle cx="68" cy="308" r="3" fill="#3b82f6"/>
+    <text x="80" y="312" fill="#3b82f6">afterRequest</text>
+    <text x="400" y="312" fill="#06b6d4">&lt;button.btn.primary&gt;</text>
+
+    <!-- Row 11 - Init -->
+    <text x="12" y="340" fill="#6a6a6a" font-size="10">+35ms</text>
+    <circle cx="68" cy="336" r="3" fill="#6366f1"/>
+    <text x="80" y="340" fill="#6366f1">beforeProcessNode</text>
+    <text x="400" y="340" fill="#06b6d4">&lt;span.badge.badge-success&gt;</text>
+
+    <text x="12" y="360" fill="#6a6a6a" font-size="10">+35ms</text>
+    <circle cx="68" cy="356" r="3" fill="#6366f1"/>
+    <text x="80" y="360" fill="#6366f1">load</text>
+    <text x="400" y="360" fill="#06b6d4">&lt;div#get-result&gt;</text>
+
+    <text x="12" y="380" fill="#6a6a6a" font-size="10">+35ms</text>
+    <circle cx="68" cy="376" r="3" fill="#22c55e"/>
+    <text x="80" y="380" fill="#22c55e">afterSettle</text>
+    <text x="400" y="380" fill="#06b6d4">&lt;div#get-result&gt;</text>
+  </g>
+
+  <rect width="800" height="460" rx="8" fill="none" stroke="#3c3c3c" stroke-width="1"/>
+</svg>
