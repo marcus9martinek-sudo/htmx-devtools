@@ -26,6 +26,22 @@ interface DomTreeNode {
 
 function scanElements(callback: (tree: DomTreeNode[], flat: ElementDescriptor[]) => void): void {
   const code = `(function() {
+    function uniqueSel(el) {
+      if (el.id) return '#' + CSS.escape(el.id);
+      var parts = [];
+      var cur = el;
+      while (cur && cur !== document.body && cur !== document.documentElement) {
+        if (cur.id) { parts.unshift('#' + CSS.escape(cur.id)); break; }
+        var tag = cur.tagName.toLowerCase();
+        if (cur.parentElement) {
+          var sibs = Array.from(cur.parentElement.children).filter(function(s) { return s.tagName === cur.tagName; });
+          if (sibs.length > 1) tag += ':nth-of-type(' + (sibs.indexOf(cur) + 1) + ')';
+        }
+        parts.unshift(tag);
+        cur = cur.parentElement;
+      }
+      return parts.length ? parts.join(' > ') : el.tagName.toLowerCase();
+    }
     function walk(el, depth) {
       var hasHx = false;
       for (var i = 0; i < el.attributes.length; i++) {
@@ -43,19 +59,13 @@ function scanElements(callback: (tree: DomTreeNode[], flat: ElementDescriptor[])
         if (a.name.indexOf('hx-') === 0 || a.name.indexOf('data-hx-') === 0) attrs[a.name] = a.value;
       }
       var tag = el.tagName.toLowerCase();
-      var sel = tag;
-      if (el.id) sel = '#' + el.id;
-      else if (el.className && typeof el.className === 'string') {
-        var cls = el.className.split(' ').filter(Boolean).slice(0,2);
-        if (cls.length) sel = tag + '.' + cls.join('.');
-      }
       var oh = el.outerHTML || '';
       var closingIdx = oh.indexOf('>');
       var openTag = closingIdx > 0 ? oh.slice(0, closingIdx + 1) : oh.slice(0, 120);
       return {
         tagName: tag, id: el.id || '',
         classList: el.className ? el.className.split(' ').filter(Boolean) : [],
-        selector: sel, htmxAttributes: attrs,
+        selector: uniqueSel(el), htmxAttributes: attrs,
         outerHtmlPreview: openTag.length > 200 ? openTag.slice(0,200) + '...' : openTag,
         children: childNodes, depth: depth, isHtmx: hasHx, devtoolsId: 0
       };
@@ -294,11 +304,13 @@ export function ElementInspector() {
       <div class="toolbar">
         <button
           class="toolbar__btn"
-          title="Select element on page"
+          title="Select an element in the page to inspect it"
           onClick={doPick}
-          style={{ color: picking.value ? 'var(--accent)' : undefined, fontSize: '16px' }}
+          style={{ color: picking.value ? 'var(--accent)' : undefined, width: '28px', height: '28px', padding: '2px' }}
         >
-          &#x2316;
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M3 1h4v1H4v3H3V1zm6 0h4v4h-1V2H9V1zM4 12H3V8h1v4zm-1 3h4v-1H4v-3H3v4zm6 0h4v-4h-1v3H9v1zm4-8h-1V4h1v3zM8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 1a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>
+          </svg>
         </button>
         <span style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
           {picking.value ? 'Click an element on the page...' : `${elementCount.value} htmx element${elementCount.value !== 1 ? 's' : ''}`}
