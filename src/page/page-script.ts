@@ -21,15 +21,25 @@ function postMessage(msg: PageMessage): void {
   }
 }
 
+function safeClone(obj: unknown): unknown {
+  try {
+    return JSON.parse(JSON.stringify(obj))
+  } catch {
+    return null
+  }
+}
+
 function flushMessages(): void {
   batchTimer = null
   const batch = pendingMessages
   pendingMessages = []
   for (const msg of batch) {
     try {
-      window.postMessage(msg, '*')
+      // Deep clone via JSON to strip non-cloneable objects (FormData, proxies, etc.)
+      const safe = safeClone(msg)
+      if (safe) window.postMessage(safe, '*')
     } catch {
-      // DataCloneError: payload contains non-cloneable objects, skip this message
+      // Skip uncloneable messages
     }
   }
 }
@@ -321,11 +331,13 @@ window.addEventListener('message', (event) => {
     const selectors = '[hx-get],[hx-post],[hx-put],[hx-delete],[hx-patch],[hx-trigger],[hx-swap],[hx-target],[hx-boost],[hx-push-url],[hx-select],[hx-ext],[data-hx-get],[data-hx-post],[data-hx-put],[data-hx-delete]'
     const elements = document.querySelectorAll(selectors)
     const list = Array.from(elements).map(el => serializeElement(el))
-    window.postMessage({
-      source: MESSAGE_SOURCE,
-      type: 'htmx:element-list',
-      payload: list,
-    }, '*')
+    try {
+      window.postMessage(safeClone({
+        source: MESSAGE_SOURCE,
+        type: 'htmx:element-list',
+        payload: list,
+      }), '*')
+    } catch { /* skip */ }
     return
   }
 
