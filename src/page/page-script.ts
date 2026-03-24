@@ -301,18 +301,36 @@ window.addEventListener('message', (event) => {
       overlay!.style.display = 'none'
       label!.style.display = 'none'
     }
+    function uniqueSelector(el: Element): string {
+      if (el.id) return '#' + CSS.escape(el.id)
+      const parts: string[] = []
+      let cur: Element | null = el
+      while (cur && cur !== document.body && cur !== document.documentElement) {
+        if (cur.id) {
+          parts.unshift('#' + CSS.escape(cur.id))
+          break
+        }
+        let tag = cur.tagName.toLowerCase()
+        if (cur.parentElement) {
+          const siblings = Array.from(cur.parentElement.children).filter(s => s.tagName === cur!.tagName)
+          if (siblings.length > 1) {
+            const idx = siblings.indexOf(cur) + 1
+            tag += `:nth-of-type(${idx})`
+          }
+        }
+        parts.unshift(tag)
+        cur = cur.parentElement
+      }
+      if (parts.length === 0) return el.tagName.toLowerCase()
+      return parts.join(' > ')
+    }
     function onClick(e: MouseEvent) {
       e.preventDefault()
       e.stopPropagation()
       cleanup()
       const el = document.elementFromPoint(e.clientX, e.clientY)
       if (!el) return
-      let sel = el.tagName.toLowerCase()
-      if (el.id) sel = '#' + el.id
-      else if (el.className && typeof el.className === 'string') {
-        const cls = el.className.split(' ').filter(Boolean).slice(0, 2)
-        if (cls.length) sel = sel + '.' + cls.join('.')
-      }
+      const sel = uniqueSelector(el)
       window.postMessage({ source: MESSAGE_SOURCE, type: 'htmx:element-picked', payload: { selector: sel } }, '*')
     }
     function onKey(e: KeyboardEvent) {
