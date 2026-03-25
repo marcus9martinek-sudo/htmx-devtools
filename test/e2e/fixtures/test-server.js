@@ -351,7 +351,7 @@ function renderContactForm(id) {
   <div class="form-row"><label>Email</label><input type="email" name="email" value="${c.email}" /></div>
   <div class="flex" style="margin-top:8px;">
     <button type="submit" class="btn success">Save</button>
-    <button class="btn outline" hx-get="/api/contact/${id}" hx-target="this" hx-swap="outerHTML">Cancel</button>
+    <button class="btn outline" hx-get="/api/contact/${id}">Cancel</button>
   </div>
 </form>`
 }
