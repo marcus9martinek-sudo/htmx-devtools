@@ -35,8 +35,18 @@ export function App() {
           </button>
         ))}
         <div class="tab-bar__spacer" />
-        {info?.detected && (
-          <span class="tab-bar__info">htmx v{info.version}</span>
+        {info?.detected && info.version && (
+          <span style={{
+            fontSize: '11px',
+            padding: '2px 8px',
+            borderRadius: '10px',
+            fontWeight: 600,
+            fontFamily: 'var(--font-mono)',
+            background: parseInt(info.version.split('.')[0], 10) >= 4 ? '#7c3aed' : '#3b82f6',
+            color: '#fff',
+          }}>
+            htmx {info.version}
+          </span>
         )}
         <button
           class="toolbar__btn"
